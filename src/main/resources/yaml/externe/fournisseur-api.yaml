@@ -1,0 +1,150 @@
+swagger: '2.0'
+info:
+  description: This is a simple api Information Center Api
+  version: 1.0.0
+  title: Fournisseur API Information Service
+tags:
+  - name: Fournisseur API
+    description: Everything about your apis
+schemes:
+  - http
+paths:
+  /fournisseur/:
+    post:
+      tags:
+        - Fournisseur
+      summary: Add a new Fournisseur
+      description: Creates a new Fournisseur
+      operationId: addFournisseur
+      parameters:
+        - in: body
+          name: body
+          description: Fournisseur object that needs to be added
+          required: true
+          schema:
+            $ref: '#/definitions/Fournisseur'
+      responses:
+        '201':
+          description: Successfully created
+          schema:
+            $ref: '#/definitions/Fournisseur'
+        '400':
+          description: Bad request
+
+  /fournisseur/{id}:
+    get:
+      tags:
+        - Fournisseur
+      summary: Retrieve a single Fournisseur
+      description: Retrieve a single Fournisseur
+      operationId: getFournisseur
+      parameters:
+        - in: path
+          name: id
+          description: Id of the Fournisseur desired to be retrieved
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Succesful retrieval of Fournisseur
+          schema:
+            $ref: '#/definitions/Fournisseur'
+        '400':
+          description: Bad request
+        '404':
+          description: Fournisseur not found
+
+  /fournisseur/delete/{id}:
+    delete:
+      tags:
+        - Fournisseur
+      summary: Delete a single Fournisseur
+      description: Delete a single Fournisseur
+      operationId: deleteFournisseur
+      parameters:
+        - in: path
+          name: id
+          description: Id of the Fournisseur to be deleted
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Succesful retrieval of Fournisseur
+          schema:
+            type:
+              boolean
+        '400':
+          description: Bad request
+        '404':
+          description: Fournisseur not found
+  /fournisseur/list:
+    get:
+      tags:
+        - Fournisseurs
+      summary: Retrieve a list of Fournisseurs
+      description: Retrieve a list of Fournisseurs
+      operationId: getFournisseurs
+      responses:
+        '200':
+          description: Succesful retrieval of Fournisseur
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Fournisseur'
+        '400':
+          description: Bad request
+        '404':
+          description: Fournisseur not found
+  /fournisseur :
+    get:
+      tags:
+        - Fournisseur
+      summary: Retrieve a Fournisseur by product ID
+      description: Retrieve a list of Fournisseurs
+      operationId: getFournisseurByReference
+      parameters:
+        - in: query
+          name: reference
+          description: Id of the Fournisseur to be deleted
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Succesful retrieval of Fournisseur
+          schema:
+            $ref: '#/definitions/Fournisseur'
+        '400':
+          description: Bad request
+        '404':
+          description: Fournisseur not found
+
+definitions:
+  Fournisseur:
+    title: Fournisseur
+    description: A Fournisseur definition
+    required:
+      - name
+      - price
+    properties:
+      id:
+        type: string
+      name:
+        type: string
+        description: Name of the Fournisseur
+      matricule:
+        type: string
+        description: Name of the Fournisseur
+      reference:
+        type: string
+        description: Reference of the product
+
+
+  FournisseurResponse:
+    type: object
+    description: Response object contains all the fournisseurs
+    properties:
+      Fournisseurs:
+        type: array
+        items:
+          $ref: '#/definitions/Fournisseur'
+        description: List of Fournisseurs

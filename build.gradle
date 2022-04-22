@@ -1,0 +1,113 @@
+plugins {
+	id 'org.springframework.boot' version '2.6.6'
+	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+	id 'java'
+	id 'jacoco'
+	id "org.flywaydb.flyway" version "8.5.5"
+	id 'org.hidetake.swagger.generator' version '2.19.2'
+}
+
+group = 'com.cofomo'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '11'
+
+configurations {
+	compileOnly {
+		extendsFrom annotationProcessor
+	}
+}
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+
+
+	swaggerCodegen 'io.swagger:swagger-codegen-cli:2.4.26'
+	swaggerCodegen 'io.swagger.codegen.v3:swagger-codegen-cli:3.0.33'
+	swaggerCodegen 'org.openapitools:openapi-generator-cli:3.3.4'
+	implementation 'io.swagger:swagger-annotations:1.6.6'
+	implementation 'org.springframework.boot:spring-boot-starter-validation:2.4.0'
+	implementation group: 'com.jparams', name: 'to-string-verifier', version: '1.4.5'
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+	implementation group: 'com.jparams', name: 'to-string-verifier', version: '1.4.5'
+
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	implementation 'org.springframework.boot:spring-boot-starter-webflux'
+	implementation 'org.flywaydb:flyway-core'
+	implementation 'org.projectlombok:lombok:1.18.20'
+	compileOnly 'org.projectlombok:lombok'
+	implementation 'com.h2database:h2'
+	annotationProcessor 'org.projectlombok:lombok'
+	implementation 'org.mapstruct:mapstruct:1.4.2.Final'
+	annotationProcessor 'org.mapstruct:mapstruct-processor:1.4.2.Final'
+	implementation 'com.google.code.gson:gson:2.7'
+	implementation 'com.googlecode.json-simple:json-simple:1.1.1'
+
+	testImplementation "com.github.tomakehurst:wiremock-jre8:2.33.1"
+
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	testImplementation 'io.projectreactor:reactor-test'
+	testImplementation 'io.cucumber:cucumber-java:7.2.3'
+	testImplementation 'junit:junit:4.13'
+	testImplementation 'io.cucumber:cucumber-spring:7.2.3'
+	testImplementation 'io.cucumber:cucumber-junit:7.2.3'
+
+	implementation group: 'com.google.guava', name: 'guava', version: 'r05'
+}
+
+configurations {
+	cucumberRuntime {
+		extendsFrom testImplementation
+	}
+}
+
+tasks.named('test') {
+	useJUnitPlatform()
+}
+
+jacoco {
+	toolVersion = "0.8.6"
+	reportsDir = file("$buildDir/jacoco")
+}
+
+test {
+//    exclude 'build/swagger-api/.*'
+
+	finalizedBy jacocoTestReport
+}
+
+jacocoTestReport {
+	dependsOn test
+}
+
+task cucumberCli() {
+	dependsOn assemble, testClasses
+	doLast {
+		javaexec {
+			main = "io.cucumber.core.cli.Main"
+			classpath = configurations.cucumberRuntime + sourceSets.main.output + sourceSets.test.output
+			args = [
+					'--plugin', 'pretty',
+					'--plugin', 'html:target/cucumber-report.html',
+					'--glue', 'com.cofomo.product.microservice',
+					'src/test/resources']
+		}
+	}
+}
+
+swaggerSources {
+	petstore {
+		inputFile = file('src/main/resources/yaml/product-api.yaml')
+		code {
+			outputDir = file("$buildDir/swagger-api")
+			language = 'spring'
+			components = ['models', 'apis']
+		}
+	}
+}
+
+compileJava.dependsOn swaggerSources.petstore.code
+sourceSets.main.java.srcDir "$buildDir/swagger-api/src/main/java"
+sourceSets.main.resources.srcDir "$buildDir/swagger-api/src/main/resources"

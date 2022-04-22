@@ -113,9 +113,6 @@ definitions:
       price:
         type: number
         description: Price of the Product
-      reference:
-        type: string
-        description: Reference of the product
       fournisseur:
         $ref: '#/definitions/Fournisseur'
 
@@ -131,12 +128,9 @@ definitions:
       name:
         type: string
         description: Name of the Fournisseur
-      matricule:
-        type: string
-        description: Name of the Fournisseur
       reference:
         type: string
-        description: Reference of the product
+        description: Reference fournisseur
   ProductResponse:
     type: object
     description: Response object contains all the products

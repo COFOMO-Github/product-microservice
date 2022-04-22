@@ -39,20 +39,14 @@ public class ProductController implements ProductApi {
         productService.deleteProduct(Long.parseLong(id));
         return new ResponseEntity<>(HttpStatus.OK);
     }
-//
-//    @Override
-//    public ResponseEntity<Fournisseur> getFournisseurByReference(String id) {
-//        log.info("Suppression de la product dont l'ID est : " + id);
-//        return ResponseEntity.status(HttpStatus.OK)
-//                .body(mapper.fournisseurEntityToFournisseurDto(productService.getFournisseurByReference(id)));
-//    }
 
     @Override
     public ResponseEntity<Product> getProduct(String id) {
         log.info("Envoi de la product dont l'ID est : " + id);
+        ProductDto productDto = productService.getProductById(Long.parseLong(id));
         Product product = mapper.productDtoToProduct(productService.getProductById(Long.parseLong(id)));
         Fournisseur fournisseur = mapper.fournsseurDtoToFournisseur(
-                productService.getFournisseurByReference(product.getReference()));
+                productService.getFournisseurByReference(productDto.getFournisseurID()));
         product.setFournisseur(fournisseur);
         return ResponseEntity.status(HttpStatus.OK)
                 .body(product);
@@ -63,13 +57,14 @@ public class ProductController implements ProductApi {
         log.info("Envoi de la liste completes des products");
         List<Product> products = mapper.productListDtoToProductList(productService.getProductList());
         products = products.stream()
-                    .map(p -> {
-                        Fournisseur fournisseur = mapper.fournsseurDtoToFournisseur(
-                                productService.getFournisseurByReference(p.getReference()));
-                        p.setFournisseur(fournisseur);
-                        return p;
-                    })
-                    .collect(Collectors.toList());
+                .map(p -> {
+                    ProductDto productDto = productService.getProductById(Long.parseLong(p.getId()));
+                    Fournisseur fournisseur = mapper.fournsseurDtoToFournisseur(
+                            productService.getFournisseurById(productDto.getFournisseurID()));
+                    p.setFournisseur(fournisseur);
+                    return p;
+                })
+                .collect(Collectors.toList());
         return ResponseEntity.status(HttpStatus.OK)
                 .body(products);
     }

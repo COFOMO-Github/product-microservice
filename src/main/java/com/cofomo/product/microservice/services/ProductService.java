@@ -18,4 +18,6 @@ public interface ProductService {
 
     FournisseurDto getFournisseurByReference(String id);
 
+    FournisseurDto getFournisseurById(String id);
+
 }

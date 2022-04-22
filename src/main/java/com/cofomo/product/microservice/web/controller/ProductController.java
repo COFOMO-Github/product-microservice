@@ -4,13 +4,16 @@ import com.cofomo.product.microservice.dto.ProductDto;
 import com.cofomo.product.microservice.mapper.MapStructMapper;
 import com.cofomo.product.microservice.services.ProductService;
 import io.swagger.api.ProductApi;
+import io.swagger.model.Fournisseur;
 import io.swagger.model.Product;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
+
 import java.util.List;
+import java.util.stream.Collectors;
 
 
 @RestController
@@ -47,14 +50,27 @@ public class ProductController implements ProductApi {
     @Override
     public ResponseEntity<Product> getProduct(String id) {
         log.info("Envoi de la product dont l'ID est : " + id);
+        Product product = mapper.productDtoToProduct(productService.getProductById(Long.parseLong(id)));
+        Fournisseur fournisseur = mapper.fournsseurDtoToFournisseur(
+                productService.getFournisseurByReference(product.getReference()));
+        product.setFournisseur(fournisseur);
         return ResponseEntity.status(HttpStatus.OK)
-                .body(mapper.productDtoToProduct(productService.getProductById(Long.parseLong(id))));
+                .body(product);
     }
 
     @Override
     public ResponseEntity<List<Product>> getProducts() {
         log.info("Envoi de la liste completes des products");
+        List<Product> products = mapper.productListDtoToProductList(productService.getProductList());
+        products = products.stream()
+                    .map(p -> {
+                        Fournisseur fournisseur = mapper.fournsseurDtoToFournisseur(
+                                productService.getFournisseurByReference(p.getReference()));
+                        p.setFournisseur(fournisseur);
+                        return p;
+                    })
+                    .collect(Collectors.toList());
         return ResponseEntity.status(HttpStatus.OK)
-                .body(mapper.productListDtoToProductList(productService.getProductList()));
+                .body(products);
     }
 }

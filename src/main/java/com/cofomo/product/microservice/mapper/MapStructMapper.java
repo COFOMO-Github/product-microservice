@@ -21,8 +21,9 @@ public interface MapStructMapper {
 
     ProductDto productEntityToProductDto(ProductEntity product);
 
-    Fournisseur fournisseurEntityToFournisseurDto(FournisseurDto fournisseur);
+//    Fournisseur fournisseurEntityToFournisseurDto(FournisseurDto fournisseur);
 
+    Fournisseur fournsseurDtoToFournisseur(FournisseurDto fournisseurDto);
 
     List<Product> productListDtoToProductList(List<ProductDto> product);
 

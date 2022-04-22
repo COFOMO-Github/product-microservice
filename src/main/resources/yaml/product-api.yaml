@@ -116,6 +116,8 @@ definitions:
       reference:
         type: string
         description: Reference of the product
+      fournisseur:
+        $ref: '#/definitions/Fournisseur'
 
   Fournisseur:
     title: Fournisseur

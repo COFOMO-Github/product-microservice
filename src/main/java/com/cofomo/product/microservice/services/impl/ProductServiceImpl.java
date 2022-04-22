@@ -58,5 +58,10 @@ public class ProductServiceImpl implements ProductService {
         return fournisseurDto;
     }
 
+    @Override
+    public FournisseurDto getFournisseurById(String id) {
+        FournisseurDto fournisseurDto = webClientService.getFournisseurByID(id);
+        return fournisseurDto;
+    }
 
 }

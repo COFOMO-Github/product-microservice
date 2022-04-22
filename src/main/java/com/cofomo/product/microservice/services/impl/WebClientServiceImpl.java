@@ -28,6 +28,17 @@ public class WebClientServiceImpl implements WebClientService {
                 .bodyToMono(FournisseurDto.class).block();
     }
 
+    @Override
+    public FournisseurDto getFournisseurByID(String param) {
+        return getWebClient().get()
+                .uri(uriBuilder -> uriBuilder
+                        .path("/fournisseur/" + param)
+                        .build())
+                .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
+                .retrieve()
+                .bodyToMono(FournisseurDto.class).block();
+    }
+
     WebClient getWebClient() {
         return WebClient
                 .builder()

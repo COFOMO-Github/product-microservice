@@ -19,9 +19,7 @@ public class FournisseurDto {
 
     private String name;
 
-    private String matricule;
-
-    private Long productId;
+    private String country;
 
     private String reference;
 

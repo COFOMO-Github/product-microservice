@@ -128,9 +128,9 @@ definitions:
       name:
         type: string
         description: Name of the Fournisseur
-      reference:
+      country:
         type: string
-        description: Reference fournisseur
+        description: Pays du fournisseur
   ProductResponse:
     type: object
     description: Response object contains all the products

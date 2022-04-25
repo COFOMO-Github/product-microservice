@@ -18,7 +18,7 @@ public class ProductDto {
 
     private Double price;
 
-    private String fournisseurID;
+    private String reference;
 
 
 }

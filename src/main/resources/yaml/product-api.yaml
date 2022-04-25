@@ -113,6 +113,9 @@ definitions:
       price:
         type: number
         description: Price of the Product
+      reference:
+        type: string
+        description: Reference of the Product
       supplier:
         $ref: '#/definitions/Fournisseur'
 

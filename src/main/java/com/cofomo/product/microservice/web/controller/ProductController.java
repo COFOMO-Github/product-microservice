@@ -46,7 +46,7 @@ public class ProductController implements ProductApi {
         ProductDto productDto = productService.getProductById(Long.parseLong(id));
         Product product = mapper.productDtoToProduct(productService.getProductById(Long.parseLong(id)));
         Fournisseur fournisseur = mapper.fournsseurDtoToFournisseur(
-                productService.getFournisseurByReference(productDto.getFournisseurID()));
+                productService.getFournisseurByReference(productDto.getReference()));
         product.setFournisseur(fournisseur);
         return ResponseEntity.status(HttpStatus.OK)
                 .body(product);
@@ -60,7 +60,7 @@ public class ProductController implements ProductApi {
                 .map(p -> {
                     ProductDto productDto = productService.getProductById(Long.parseLong(p.getId()));
                     Fournisseur fournisseur = mapper.fournsseurDtoToFournisseur(
-                            productService.getFournisseurById(productDto.getFournisseurID()));
+                            productService.getFournisseurByReference(productDto.getReference()));
                     p.setFournisseur(fournisseur);
                     return p;
                 })

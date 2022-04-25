@@ -14,7 +14,6 @@ import java.util.List;
 @Mapper(componentModel = "spring")
 public interface MapStructMapper {
 
-
     Product productDtoToProduct(ProductDto product);
 
     ProductDto productToProductDto(Product product);

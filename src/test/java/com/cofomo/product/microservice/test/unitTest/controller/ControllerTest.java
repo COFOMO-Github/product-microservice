@@ -2,8 +2,11 @@ package com.cofomo.product.microservice.test.unitTest.controller;
 
 
 import com.cofomo.product.microservice.dao.error.RestError;
+import com.cofomo.product.microservice.dto.FournisseurDto;
+import com.cofomo.product.microservice.dto.ProductDto;
 import com.cofomo.product.microservice.model.ProductEntity;
 import com.cofomo.product.microservice.web.exception.NotFoundException;
+import io.swagger.model.Fournisseur;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.MediaType;
@@ -14,6 +17,7 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import static com.cofomo.product.microservice.web.exception.FunctionalErrorCode.NOT_FOUND_ENTITY_ID;
 import static com.cofomo.productmicroservice.utils.Constants.PRODUCT_URL;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -31,7 +35,20 @@ public class ControllerTest extends AbstractControllerTest {
     public void getProductList() throws Exception {
         String uri = PRODUCT_URL + "/list";
 
+        ProductDto productDto = ProductDto.builder()
+                .id(1L)
+                .name("Iphone 13")
+                .price(12000D)
+                .reference("1")
+                .build();
+        FournisseurDto fournisseurDto = FournisseurDto.builder()
+                .id(2L)
+                .name("Iphone 13")
+                .reference("1")
+                .build();
         when(productService.getProductList()).thenReturn(productDtoList());
+        when(productService.getProductById(any())).thenReturn(productDto);
+        when(productService.getFournisseurByReference(any())).thenReturn(fournisseurDto);
 
         this.mockMvc.perform(MockMvcRequestBuilders.get(uri)
                         .contentType(MediaType.APPLICATION_JSON_VALUE))
@@ -86,7 +103,7 @@ public class ControllerTest extends AbstractControllerTest {
 
     @Test
     public void addProductTest() throws Exception {
-        String uri = PRODUCT_URL ;
+        String uri = PRODUCT_URL;
 
         String expectedString = super.mapToJson(product2());
 
@@ -98,7 +115,6 @@ public class ControllerTest extends AbstractControllerTest {
                 .andExpect(status().isCreated()).andDo(print());
 
     }
-
 
 
 }

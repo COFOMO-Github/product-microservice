@@ -1,6 +1,7 @@
 package com.cofomo.product.microservice.test.unitTest.controller;
 
 
+import com.cofomo.product.microservice.dto.FournisseurDto;
 import com.cofomo.product.microservice.dto.ProductDto;
 import com.cofomo.product.microservice.mapper.MapStructMapper;
 import com.cofomo.product.microservice.model.ProductEntity;
@@ -75,6 +76,7 @@ public abstract class AbstractControllerTest {
 
     public ProductEntity product1() {
         return ProductEntity.builder()
+                .id(1L)
                 .name("Iphone 11 PRO MAX")
                 .price(7000D)
                 .reffrs("1")
@@ -82,6 +84,7 @@ public abstract class AbstractControllerTest {
     }
     public ProductDto productDto1() {
         return ProductDto.builder()
+                .id(1L)
                 .name("Iphone 11 PRO MAX")
                 .price(7000D)
                 .reffrs("1")
@@ -111,4 +114,6 @@ public abstract class AbstractControllerTest {
                 .add(product3()).build().stream().map(productEntity ->
                         mapStructMapper.productEntityToProductDto(productEntity)).collect(Collectors.toList());
     }
+
+
 }

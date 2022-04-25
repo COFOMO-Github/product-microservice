@@ -1,0 +1,5 @@
+{
+  "httpStatusCode": 404,
+  "httpStatus": "NOT_FOUND",
+  "message": "No record of type SqueletteEntity and with id 10 is present in the database"
+}

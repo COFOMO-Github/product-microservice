@@ -77,14 +77,14 @@ public abstract class AbstractControllerTest {
         return ProductEntity.builder()
                 .name("Iphone 11 PRO MAX")
                 .price(7000D)
-                .fournisseurID("1")
+                .reffrs("1")
                 .build();
     }
     public ProductDto productDto1() {
         return ProductDto.builder()
                 .name("Iphone 11 PRO MAX")
                 .price(7000D)
-                .fournisseurID("1")
+                .reffrs("1")
                 .build();
     }
 
@@ -92,7 +92,7 @@ public abstract class AbstractControllerTest {
         return ProductEntity.builder()
                 .name("IphoneX")
                 .price(4000D)
-                .fournisseurID("1")
+                .reffrs("1")
                 .build();
     }
 
@@ -100,7 +100,7 @@ public abstract class AbstractControllerTest {
         return ProductEntity.builder()
                 .name("Iphone 13")
                 .price(12000D)
-                .fournisseurID("1")
+                .reffrs("1")
                 .build();
     }
 

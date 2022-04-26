@@ -3,6 +3,7 @@ package com.cofomo.product.microservice.web.controller;
 import com.cofomo.product.microservice.dto.ProductDto;
 import com.cofomo.product.microservice.mapper.MapStructMapper;
 import com.cofomo.product.microservice.services.ProductService;
+import com.cofomo.product.microservice.web.exception.NotFoundException;
 import io.swagger.api.ProductApi;
 import io.swagger.model.Fournisseur;
 import io.swagger.model.Product;
@@ -59,9 +60,13 @@ public class ProductController implements ProductApi {
         products = products.stream()
                 .map(p -> {
                     ProductDto productDto = productService.getProductById(Long.parseLong(p.getId()));
-                    Fournisseur fournisseur = mapper.fournsseurDtoToFournisseur(
-                            productService.getFournisseurByReference(productDto.getReference()));
-                    p.setSupplier(fournisseur);
+                    try {
+                        Fournisseur fournisseur = mapper.fournsseurDtoToFournisseur(
+                                productService.getFournisseurByReference(productDto.getReference()));
+                        p.setSupplier(fournisseur);
+                    } catch (NotFoundException e) {
+                        log.error("Couldn't retrieve Supplier with reference = " + productDto.getReference(), e);
+                    }
                     return p;
                 })
                 .collect(Collectors.toList());

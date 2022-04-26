@@ -27,7 +27,8 @@ public class Constants {
     public static final String ID = "ID";
     public static final String NAME = "NAME";
     public static final String PRICE = "PRICE";
-    public static final String REFERENCE = "REFERENCE";
+    public static final String REFPDT = "REFPDT";
+    public static final String REFFRS = "REFFRS";
 
     /*********************
      * Messages Exceptions

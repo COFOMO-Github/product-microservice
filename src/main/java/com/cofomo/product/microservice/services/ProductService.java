@@ -16,7 +16,7 @@ public interface ProductService {
 
     void deleteProduct(Long id);
 
-    FournisseurDto getFournisseurByReference(String id);
+    FournisseurDto getFournisseurByReference(String reffrs);
 
     FournisseurDto getFournisseurById(String id);
 

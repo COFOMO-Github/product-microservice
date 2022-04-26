@@ -20,16 +20,16 @@ public class WebClientServiceImpl implements WebClientService {
     private static String calculeApiPath = "http://localhost:8085/api/v1";
 
     @Override
-    public FournisseurDto getFournisseurByReference(String param) {
+    public FournisseurDto getFournisseurByReference(String reffrs) {
         return getWebClient().get()
                 .uri(uriBuilder -> uriBuilder
                         .path("/fournisseur")
-                        .queryParam("reference", param)
+                        .queryParam("reference", reffrs)
                         .build())
                 .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
                 .retrieve()
                 .onStatus(HttpStatus::is4xxClientError, clientResponse -> {
-                    return Mono.error(new NotFoundException("No Supplier found with reference = " + param));
+                    return Mono.error(new NotFoundException("No Supplier found with reference = " + reffrs));
                 })
                 .bodyToMono(FournisseurDto.class).block();
     }

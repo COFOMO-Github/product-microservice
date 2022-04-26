@@ -47,7 +47,7 @@ public class ProductController implements ProductApi {
         ProductDto productDto = productService.getProductById(Long.parseLong(id));
         Product product = mapper.productDtoToProduct(productService.getProductById(Long.parseLong(id)));
         Fournisseur fournisseur = mapper.fournsseurDtoToFournisseur(
-                productService.getFournisseurByReference(productDto.getReference()));
+                productService.getFournisseurByReference(productDto.getReffrs()));
         product.setSupplier(fournisseur);
         return ResponseEntity.status(HttpStatus.OK)
                 .body(product);
@@ -62,10 +62,10 @@ public class ProductController implements ProductApi {
                     ProductDto productDto = productService.getProductById(Long.parseLong(p.getId()));
                     try {
                         Fournisseur fournisseur = mapper.fournsseurDtoToFournisseur(
-                                productService.getFournisseurByReference(productDto.getReference()));
+                                productService.getFournisseurByReference(productDto.getReffrs()));
                         p.setSupplier(fournisseur);
                     } catch (NotFoundException e) {
-                        log.error("Couldn't retrieve Supplier with reference = " + productDto.getReference(), e);
+                        log.error("Couldn't retrieve Supplier with reference = " + productDto.getReffrs(), e);
                     }
                     return p;
                 })

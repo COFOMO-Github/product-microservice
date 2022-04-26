@@ -25,8 +25,10 @@ public class ProductEntity {
     @Column(name = PRICE)
     private Double price;
 
-    @Column(name = REFERENCE, unique = true)
-    private String reference;
+    @Column(name = REFPDT, unique = true)
+    private String refpdt;
 
+    @Column(name = REFFRS, unique = true)
+    private String reffrs;
 
 }

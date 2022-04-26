@@ -18,7 +18,8 @@ public class ProductDto {
 
     private Double price;
 
-    private String reference;
+    private String refpdt;
 
+    private String reffrs;
 
 }

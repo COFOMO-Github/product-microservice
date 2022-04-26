@@ -53,8 +53,8 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public FournisseurDto getFournisseurByReference(String id) {
-        FournisseurDto fournisseurDto = webClientService.getFournisseurByReference(id);
+    public FournisseurDto getFournisseurByReference(String reffrs) {
+        FournisseurDto fournisseurDto = webClientService.getFournisseurByReference(reffrs);
         return fournisseurDto;
     }
 

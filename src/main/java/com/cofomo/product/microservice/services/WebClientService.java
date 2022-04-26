@@ -5,7 +5,7 @@ import com.cofomo.product.microservice.dto.FournisseurDto;
 
 public interface WebClientService {
 
-    FournisseurDto getFournisseurByReference(String id);
+    FournisseurDto getFournisseurByReference(String reffrs);
 
     FournisseurDto getFournisseurByID(String param);
 }

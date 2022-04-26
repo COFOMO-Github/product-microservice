@@ -113,9 +113,12 @@ definitions:
       price:
         type: number
         description: Price of the Product
-      reference:
+      refpdt:
         type: string
         description: Reference of the Product
+      reffrs:
+        type: string
+        description: Reference of the reffrs
       supplier:
         $ref: '#/definitions/Fournisseur'
 
@@ -134,6 +137,7 @@ definitions:
       country:
         type: string
         description: Pays du fournisseur
+
   ProductResponse:
     type: object
     description: Response object contains all the products

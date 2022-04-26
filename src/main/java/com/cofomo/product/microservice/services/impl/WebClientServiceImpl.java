@@ -2,12 +2,15 @@ package com.cofomo.product.microservice.services.impl;
 
 import com.cofomo.product.microservice.dto.FournisseurDto;
 import com.cofomo.product.microservice.services.WebClientService;
+import com.cofomo.product.microservice.web.exception.NotFoundException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
+import reactor.core.publisher.Mono;
 
 @Service
 @RequiredArgsConstructor
@@ -25,6 +28,9 @@ public class WebClientServiceImpl implements WebClientService {
                         .build())
                 .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
                 .retrieve()
+                .onStatus(HttpStatus::is4xxClientError, clientResponse -> {
+                    return Mono.error(new NotFoundException("No Supplier found with reference = " + param));
+                })
                 .bodyToMono(FournisseurDto.class).block();
     }
 

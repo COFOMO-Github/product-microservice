@@ -2,6 +2,7 @@ package com.cofomo.product.microservice.test.cucumber.definitions;
 
 import com.cofomo.product.microservice.ProductMicroserviceApplication;
 import com.github.tomakehurst.wiremock.WireMockServer;
+import io.swagger.model.Product;
 import org.apache.hc.client5.http.classic.methods.HttpDelete;
 import org.apache.hc.client5.http.classic.methods.HttpGet;
 import org.apache.hc.client5.http.classic.methods.HttpPost;

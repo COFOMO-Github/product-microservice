@@ -1,5 +1,12 @@
 {
   "id": "1",
   "name": "Iphone 11 PRO MAX",
-  "price": 7500.0
+  "price": 7000.0,
+  "refpdt": null,
+  "reffrs": "REF_APPLE_STORE_1",
+  "supplier": {
+    "id": "1",
+    "name": "Apple",
+    "country": "Maroc"
+  }
 }

@@ -79,7 +79,8 @@ public abstract class AbstractControllerTest {
                 .id(1L)
                 .name("Iphone 11 PRO MAX")
                 .price(7000D)
-                .reffrs("1")
+                .reffrs("reffrs")
+                .refpdt("refpdt")
                 .build();
     }
     public ProductDto productDto1() {
@@ -87,23 +88,28 @@ public abstract class AbstractControllerTest {
                 .id(1L)
                 .name("Iphone 11 PRO MAX")
                 .price(7000D)
-                .reffrs("1")
+                .reffrs("reffrs")
+                .refpdt("refpdt")
                 .build();
     }
 
     public ProductEntity product2() {
         return ProductEntity.builder()
+                .id(1L)
                 .name("IphoneX")
                 .price(4000D)
-                .reffrs("1")
+                .reffrs("reffrs")
+                .refpdt("refpdt")
                 .build();
     }
 
     public ProductEntity product3() {
         return ProductEntity.builder()
+                .id(1L)
                 .name("Iphone 13")
                 .price(12000D)
-                .reffrs("1")
+                .reffrs("reffrs")
+                .refpdt("refpdt")
                 .build();
     }
 

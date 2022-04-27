@@ -6,7 +6,6 @@ import com.cofomo.product.microservice.dto.FournisseurDto;
 import com.cofomo.product.microservice.dto.ProductDto;
 import com.cofomo.product.microservice.model.ProductEntity;
 import com.cofomo.product.microservice.web.exception.NotFoundException;
-import io.swagger.model.Fournisseur;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.MediaType;
@@ -14,8 +13,8 @@ import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
+import static com.cofomo.product.microservice.utils.Constants.PRODUCT_URL;
 import static com.cofomo.product.microservice.web.exception.FunctionalErrorCode.NOT_FOUND_ENTITY_ID;
-import static com.cofomo.productmicroservice.utils.Constants.PRODUCT_URL;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
@@ -39,12 +38,14 @@ public class ControllerTest extends AbstractControllerTest {
                 .id(1L)
                 .name("Iphone 13")
                 .price(12000D)
-                .reference("1")
+                .reffrs("reffrs")
+                .refpdt("refpdt")
                 .build();
+
         FournisseurDto fournisseurDto = FournisseurDto.builder()
                 .id(2L)
                 .name("Iphone 13")
-                .reference("1")
+                .reference("reffrs")
                 .build();
         when(productService.getProductList()).thenReturn(productDtoList());
         when(productService.getProductById(any())).thenReturn(productDto);

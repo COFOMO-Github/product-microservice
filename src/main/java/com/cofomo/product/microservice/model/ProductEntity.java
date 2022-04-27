@@ -4,7 +4,7 @@ import lombok.*;
 
 import javax.persistence.*;
 
-import static com.cofomo.productmicroservice.utils.Constants.*;
+import static com.cofomo.product.microservice.utils.Constants.*;
 
 @Entity
 @Data

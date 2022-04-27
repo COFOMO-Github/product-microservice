@@ -2,7 +2,6 @@ package com.cofomo.product.microservice.test.cucumber.definitions;
 
 import com.cofomo.product.microservice.ProductMicroserviceApplication;
 import com.github.tomakehurst.wiremock.WireMockServer;
-import io.swagger.model.Product;
 import org.apache.hc.client5.http.classic.methods.HttpDelete;
 import org.apache.hc.client5.http.classic.methods.HttpGet;
 import org.apache.hc.client5.http.classic.methods.HttpPost;
@@ -22,7 +21,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.math.BigDecimal;
 
-import static com.cofomo.productmicroservice.utils.Constants.JSON_TEST_DATA_FILE_PATH;
+import static com.cofomo.product.microservice.utils.Constants.JSON_TEST_DATA_FILE_PATH;
 import static com.github.tomakehurst.wiremock.client.WireMock.*;
 import static com.github.tomakehurst.wiremock.core.WireMockConfiguration.options;
 

@@ -16,13 +16,29 @@ configurations {
 		extendsFrom annotationProcessor
 	}
 }
-
+// tag::configurations[]
+configurations {
+	jaxb
+}
+// end::configurations[]
 repositories {
 	mavenCentral()
 }
 
-dependencies {
+// tag:: soap
+compileJava.dependsOn 'genJaxb'
+// end::soap
 
+dependencies {
+// tag:: soap
+	implementation 'com.sun.xml.bind:jaxb-core:2.3.0.1'
+	implementation 'com.sun.xml.bind:jaxb-xjc:2.3.2'
+	implementation 'com.sun.xml.bind:jaxb-impl:2.3.2'
+	implementation 'org.glassfish.jaxb:jaxb-runtime'
+	implementation 'org.springframework.ws:spring-ws-core:2.2.0.RELEASE'
+	jaxb "com.sun.xml.bind:jaxb-xjc:2.1.7"
+	implementation 'com.sun.xml.messaging.saaj:saaj-impl:1.5.3'
+// end::soap
 
 	swaggerCodegen 'io.swagger:swagger-codegen-cli:2.4.26'
 	swaggerCodegen 'io.swagger.codegen.v3:swagger-codegen-cli:3.0.33'
@@ -56,6 +72,55 @@ dependencies {
 
 //	implementation group: 'com.google.guava', name: 'guava', version: 'r05'
 }
+
+// tag:: soap
+// tag::wsdl[]
+task genJaxb {
+	ext.sourcesDir = "${buildDir}/generated-sources/jaxb"
+	ext.classesDir = "${buildDir}/classes/jaxb"
+	ext.schema = "http://localhost:8088/api/v1/ws/product-detail.wsdl"
+
+	outputs.dir classesDir
+
+	doLast() {
+		project.ant {
+			taskdef name: "xjc", classname: "com.sun.tools.xjc.XJCTask",
+					classpath: configurations.jaxb.asPath
+			mkdir(dir: sourcesDir)
+			mkdir(dir: classesDir)
+
+			xjc(destdir: sourcesDir,language: 'WSDL', schema: schema,
+					package: "com.cofomo.product.microservice.wsdl") {
+				arg(value: "-wsdl")
+				produces(dir: sourcesDir, includes: "**/*.java")
+			}
+
+			jaxbTargetDir = classesDir
+			javac(destdir: classesDir, source: 11, target: 11, debug: true,
+					debugLevel: "lines,vars,source",
+					classpath: configurations.jaxb.asPath) {
+				src(path: sourcesDir)
+				include(name: "**/*.java")
+				include(name: "*.java")
+			}
+
+			copy(todir: classesDir) {
+				fileset(dir: sourcesDir, erroronmissingdir: false) {
+					exclude(name: "**/*.java")
+				}
+			}
+		}
+	}
+}
+// end::wsdl[]
+
+
+
+bootJar {
+	baseName = 'gs-consuming-web-service'
+	version = '0.0.1'
+}
+// end::soap
 
 configurations {
 	cucumberRuntime {
@@ -111,3 +176,7 @@ swaggerSources {
 compileJava.dependsOn swaggerSources.petstore.code
 sourceSets.main.java.srcDir "$buildDir/swagger-api/src/main/java"
 sourceSets.main.resources.srcDir "$buildDir/swagger-api/src/main/resources"
+
+// tag:: soap
+sourceSets.main.java.srcDir "$buildDir/generated-sources/jaxb"
+// end::soap

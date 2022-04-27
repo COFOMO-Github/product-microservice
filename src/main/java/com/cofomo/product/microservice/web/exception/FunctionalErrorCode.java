@@ -3,7 +3,7 @@ package com.cofomo.product.microservice.web.exception;
 import lombok.Getter;
 import org.springframework.http.HttpStatus;
 
-import static com.cofomo.productmicroservice.utils.Constants.MESSG_ERR;
+import static com.cofomo.product.microservice.utils.Constants.MESSG_ERR;
 
 
 @Getter

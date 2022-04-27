@@ -1,4 +1,4 @@
-package com.cofomo.productmicroservice.utils;
+package com.cofomo.product.microservice.utils;
 
 import org.springframework.stereotype.Component;
 

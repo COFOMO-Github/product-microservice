@@ -121,6 +121,8 @@ definitions:
         description: Reference of the reffrs
       supplier:
         $ref: '#/definitions/Fournisseur'
+      productDetail:
+        $ref: '#/definitions/ProductDetailResponse'
 
   Fournisseur:
     title: Fournisseur
@@ -147,3 +149,21 @@ definitions:
         items:
           $ref: '#/definitions/Product'
         description: List of Products
+
+  ProductDetailResponse:
+    title: Product Detail Response
+    description: Product Details
+    properties:
+      id:
+        type: string
+      productName:
+        type: string
+      reference:
+        type: string
+        description: Reference Produit
+      category:
+        type: string
+      marque:
+        type: string
+      basePrice:
+        type: string

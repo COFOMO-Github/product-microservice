@@ -8,13 +8,15 @@ import io.swagger.model.Fournisseur;
 import io.swagger.model.Product;
 import io.swagger.model.ProductDetailResponse;
 import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 
 import java.util.List;
 
 @Mapper(componentModel = "spring")
 public interface MapStructMapper {
 
-
+    @Mapping(target = "supplier", ignore = true)
+    @Mapping(target = "productDetail", ignore = true)
     Product productDtoToProduct(ProductDto product);
 
     ProductDto productToProductDto(Product product);

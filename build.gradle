@@ -78,7 +78,7 @@ dependencies {
 task genJaxb {
 	ext.sourcesDir = "${buildDir}/generated-sources/jaxb"
 	ext.classesDir = "${buildDir}/classes/jaxb"
-	ext.schema = "${projectDir}/src/main/resources/wsdl/product-detail.wsdl"
+	ext.schema = "http://localhost:8088/api/v1/ws/product-detail.wsdl"
 
 	outputs.dir classesDir
 
@@ -89,9 +89,8 @@ task genJaxb {
 			mkdir(dir: sourcesDir)
 			mkdir(dir: classesDir)
 
-			xjc(destdir: sourcesDir,language: 'WSDL',
+			xjc(destdir: sourcesDir,language: 'WSDL', schema: schema,
 					package: "com.cofomo.product.microservice.wsdl") {
-				schema(dir: "${projectDir}/src/main/resources/wsdl", includes: '**/*.wsdl')
 				arg(value: "-wsdl")
 				produces(dir: sourcesDir, includes: "**/*.java")
 			}

@@ -121,7 +121,7 @@ definitions:
         description: Reference of the reffrs
       supplier:
         $ref: '#/definitions/Fournisseur'
-      productDetailResponse:
+      productDetail:
         $ref: '#/definitions/ProductDetailResponse'
 
   Fournisseur:
@@ -151,7 +151,7 @@ definitions:
         description: List of Products
 
   ProductDetailResponse:
-    title: ProductDetailResponse
+    title: Product Detail Response
     description: Product Details
     properties:
       id:

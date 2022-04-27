@@ -4,7 +4,7 @@ import lombok.*;
 
 import javax.persistence.*;
 
-import static com.cofomo.productmicroservice.utils.Constants.*;
+import static com.cofomo.product.microservice.utils.Constants.*;
 
 @Entity
 @Data
@@ -25,10 +25,10 @@ public class ProductEntity {
     @Column(name = PRICE)
     private Double price;
 
-    @Column(name = REFPDT, unique = true)
+    @Column(name = REFPDT)
     private String refpdt;
 
-    @Column(name = REFFRS, unique = true)
+    @Column(name = REFFRS)
     private String reffrs;
 
 }

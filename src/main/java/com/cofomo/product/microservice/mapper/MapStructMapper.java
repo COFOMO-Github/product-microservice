@@ -3,16 +3,20 @@ package com.cofomo.product.microservice.mapper;
 import com.cofomo.product.microservice.dto.FournisseurDto;
 import com.cofomo.product.microservice.dto.ProductDto;
 import com.cofomo.product.microservice.model.ProductEntity;
+import com.cofomo.product.microservice.wsdl.ProductDetail;
 import io.swagger.model.Fournisseur;
 import io.swagger.model.Product;
+import io.swagger.model.ProductDetailResponse;
 import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 
 import java.util.List;
 
 @Mapper(componentModel = "spring")
 public interface MapStructMapper {
 
-
+    @Mapping(target = "supplier", ignore = true)
+    @Mapping(target = "productDetail", ignore = true)
     Product productDtoToProduct(ProductDto product);
 
     ProductDto productToProductDto(Product product);
@@ -26,5 +30,8 @@ public interface MapStructMapper {
     List<Product> productListDtoToProductList(List<ProductDto> product);
 
     List<ProductDto> productListEntityToProductDtoList(List<ProductEntity> product);
+
+    ProductDetail mapToProductDetail(ProductDetailResponse productDetailResponse);
+    ProductDetailResponse mapToProductDetailResponse(ProductDetail productDetail);
 
 }

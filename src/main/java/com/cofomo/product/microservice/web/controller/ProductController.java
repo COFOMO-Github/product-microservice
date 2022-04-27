@@ -3,7 +3,9 @@ package com.cofomo.product.microservice.web.controller;
 import com.cofomo.product.microservice.dto.ProductDto;
 import com.cofomo.product.microservice.mapper.MapStructMapper;
 import com.cofomo.product.microservice.services.ProductService;
+import com.cofomo.product.microservice.services.impl.ProductDetailServiceImpl;
 import com.cofomo.product.microservice.web.exception.NotFoundException;
+import com.cofomo.product.microservice.wsdl.ProductDetail;
 import io.swagger.api.ProductApi;
 import io.swagger.model.Fournisseur;
 import io.swagger.model.Product;
@@ -12,6 +14,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -26,6 +30,7 @@ public class ProductController implements ProductApi {
 
     ProductService productService;
     MapStructMapper mapper;
+    final ProductDetailServiceImpl productDetailService;
 
     @Override
     public ResponseEntity<Product> addProduct(Product product) {
@@ -51,6 +56,10 @@ public class ProductController implements ProductApi {
         Fournisseur fournisseur = mapper.fournsseurDtoToFournisseur(
                 productService.getFournisseurByReference(productDto.getReffrs()));
         product.setSupplier(fournisseur);
+
+        ProductDetail productDetail = productDetailService.getProductDetail(productDto.getRefpdt());
+        product.setProductDetail(mapper.mapToProductDetailResponse(productDetail));
+
         return ResponseEntity.status(HttpStatus.OK)
                 .body(product);
     }
@@ -66,6 +75,10 @@ public class ProductController implements ProductApi {
                         Fournisseur fournisseur = mapper.fournsseurDtoToFournisseur(
                                 productService.getFournisseurByReference(productDto.getReffrs()));
                         p.setSupplier(fournisseur);
+
+                        ProductDetail productDetail = productDetailService.getProductDetail(productDto.getRefpdt());
+                        p.setProductDetail(mapper.mapToProductDetailResponse(productDetail));
+
                     } catch (NotFoundException e) {
                         log.error("Couldn't retrieve Supplier with reference = " + productDto.getReffrs(), e);
                     }
@@ -74,5 +87,11 @@ public class ProductController implements ProductApi {
                 .collect(Collectors.toList());
         return ResponseEntity.status(HttpStatus.OK)
                 .body(products);
+    }
+
+    @GetMapping("/getProductDetails")
+    public ResponseEntity<ProductDetail> getProductDetail(@RequestParam String reference){
+        return ResponseEntity.status(HttpStatus.OK)
+                .body(productDetailService.getProductDetail(reference));
     }
 }

@@ -22,7 +22,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.math.BigDecimal;
 
-import static com.cofomo.productmicroservice.utils.Constants.JSON_TEST_DATA_FILE_PATH;
+import static com.cofomo.product.microservice.utils.Constants.JSON_TEST_DATA_FILE_PATH;
 import static com.github.tomakehurst.wiremock.client.WireMock.*;
 import static com.github.tomakehurst.wiremock.core.WireMockConfiguration.options;
 

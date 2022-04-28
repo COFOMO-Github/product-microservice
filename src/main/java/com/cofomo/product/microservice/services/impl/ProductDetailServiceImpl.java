@@ -1,5 +1,6 @@
 package com.cofomo.product.microservice.services.impl;
 
+import com.cofomo.product.microservice.services.ProductDetailService;
 import com.cofomo.product.microservice.wsdl.ProductDetail;
 import com.cofomo.product.microservice.wsdl.ProductDetailRequest;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,11 +9,12 @@ import org.springframework.stereotype.Service;
 import org.springframework.ws.client.core.WebServiceTemplate;
 
 @Service
-public class ProductDetailServiceImpl {
+public class ProductDetailServiceImpl implements ProductDetailService {
 
     @Autowired
     private Jaxb2Marshaller marshaller;
 
+    @Override
     public ProductDetail getProductDetail(String reference) {
         ProductDetailRequest request = new ProductDetailRequest();
         request.setReference(reference);

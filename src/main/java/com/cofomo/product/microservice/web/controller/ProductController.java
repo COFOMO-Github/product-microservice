@@ -2,8 +2,8 @@ package com.cofomo.product.microservice.web.controller;
 
 import com.cofomo.product.microservice.dto.ProductDto;
 import com.cofomo.product.microservice.mapper.MapStructMapper;
+import com.cofomo.product.microservice.services.ProductDetailService;
 import com.cofomo.product.microservice.services.ProductService;
-import com.cofomo.product.microservice.services.impl.ProductDetailServiceImpl;
 import com.cofomo.product.microservice.web.exception.NotFoundException;
 import com.cofomo.product.microservice.wsdl.ProductDetail;
 import io.swagger.api.ProductApi;
@@ -30,7 +30,7 @@ public class ProductController implements ProductApi {
 
     ProductService productService;
     MapStructMapper mapper;
-    final ProductDetailServiceImpl productDetailService;
+    final ProductDetailService productDetailService;
 
     @Override
     public ResponseEntity<Product> addProduct(Product product) {

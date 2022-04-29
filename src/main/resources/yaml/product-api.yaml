@@ -1,0 +1,169 @@
+swagger: '2.0'
+info:
+  description: This is a simple api Information Center Api
+  version: 1.0.0
+  title: Product API Information Service
+tags:
+  - name: Product API
+    description: Everything about your apis
+schemes:
+  - http
+paths:
+  /product:
+    post:
+      tags:
+        - Product
+      summary: Add a new Product
+      description: Creates a new Product
+      operationId: addProduct
+      parameters:
+        - in: body
+          name: body
+          description: Product object that needs to be added
+          required: true
+          schema:
+            $ref: '#/definitions/Product'
+      responses:
+        '201':
+          description: Successfully created
+          schema:
+            $ref: '#/definitions/Product'
+        '400':
+          description: Bad request
+
+  /product/{id}:
+    get:
+      tags:
+        - Product
+      summary: Retrieve a single Product
+      description: Retrieve a single Product
+      operationId: getProduct
+      parameters:
+        - in: path
+          name: id
+          description: Id of the Product desired to be retrieved
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Succesful retrieval of Product
+          schema:
+            $ref: '#/definitions/Product'
+        '400':
+          description: Bad request
+        '404':
+          description: Product not found
+
+  /product/delete/{id}:
+    delete:
+      tags:
+        - Product
+      summary: Delete a single Product
+      description: Delete a single Product
+      operationId: deleteProduct
+      parameters:
+        - in: path
+          name: id
+          description: Id of the Product to be deleted
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Succesful retrieval of Product
+          schema:
+            type:
+              boolean
+        '400':
+          description: Bad request
+        '404':
+          description: Product not found
+  /product/list:
+    get:
+      tags:
+        - products
+      summary: Retrieve a list of Products
+      description: Retrieve a list of Products
+      operationId: getProducts
+      responses:
+        '200':
+          description: Succesful retrieval of Product
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Product'
+        '400':
+          description: Bad request
+        '404':
+          description: Product not found
+
+
+definitions:
+  Product:
+    title: Product
+    description: A Product definition
+    required:
+      - name
+      - price
+    properties:
+      id:
+        type: string
+      name:
+        type: string
+        description: Name of the Product
+      price:
+        type: number
+        description: Price of the Product
+      refpdt:
+        type: string
+        description: Reference of the Product
+      reffrs:
+        type: string
+        description: Reference of the reffrs
+      supplier:
+        $ref: '#/definitions/Fournisseur'
+      productDetail:
+        $ref: '#/definitions/ProductDetailResponse'
+
+  Fournisseur:
+    title: Fournisseur
+    description: A Fournisseur definition
+    required:
+      - name
+      - price
+    properties:
+      id:
+        type: string
+      name:
+        type: string
+        description: Name of the Fournisseur
+      country:
+        type: string
+        description: Pays du fournisseur
+
+  ProductResponse:
+    type: object
+    description: Response object contains all the products
+    properties:
+      Products:
+        type: array
+        items:
+          $ref: '#/definitions/Product'
+        description: List of Products
+
+  ProductDetailResponse:
+    title: Product Detail Response
+    description: Product Details
+    properties:
+      id:
+        type: string
+      productName:
+        type: string
+      reference:
+        type: string
+        description: Reference Produit
+      category:
+        type: string
+      marque:
+        type: string
+      basePrice:
+        type: string

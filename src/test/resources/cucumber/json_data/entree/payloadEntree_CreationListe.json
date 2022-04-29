@@ -1,0 +1,74 @@
+[
+  {
+    "id": "1",
+    "name": "Iphone 11 PRO MAX",
+    "price": 7000.0,
+    "refpdt": null,
+    "reffrs": "REF_APPLE_STORE_1",
+    "supplier": {
+      "id": "1",
+      "name": "Apple",
+      "country": "Maroc"
+    }
+  },
+  {
+    "id": "2",
+    "name": "IphoneX",
+    "price": 4000.0,
+    "refpdt": null,
+    "reffrs": "REF_APPLE_STORE_2",
+    "supplier": {
+      "id": "2",
+      "name": "Apple",
+      "country": "Maroc"
+    }
+  },
+  {
+    "id": "3",
+    "name": "Iphone 13",
+    "price": 12000.0,
+    "refpdt": null,
+    "reffrs": "REF_APPLE_STORE_3",
+    "supplier": {
+      "id": "3",
+      "name": "Apple",
+      "country": "Maroc"
+    }
+  },
+  {
+    "id": "4",
+    "name": "Iphone 12 PR",
+    "price": 10000.0,
+    "refpdt": null,
+    "reffrs": "REF_APPLE_STORE_3",
+    "supplier": {
+      "id": "3",
+      "name": "Apple",
+      "country": "Maroc"
+    }
+  },
+  {
+    "id": "5",
+    "name": "S20 plus ",
+    "price": 10000.0,
+    "refpdt": null,
+    "reffrs": "REF_Samsung_STORE_1",
+    "supplier": {
+      "id": "5",
+      "name": "Samsung",
+      "country": "Maroc"
+    }
+  },
+  {
+    "id": "6",
+    "name": "S22 ",
+    "price": 10000.0,
+    "refpdt": null,
+    "reffrs": "REF_Samsung_STORE_3",
+    "supplier": {
+      "id": "7",
+      "name": "Samsung",
+      "country": "Maroc"
+    }
+  }
+]

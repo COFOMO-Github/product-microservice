@@ -89,9 +89,4 @@ public class ProductController implements ProductApi {
                 .body(products);
     }
 
-    @GetMapping("/getProductDetails")
-    public ResponseEntity<ProductDetail> getProductDetail(@RequestParam String reference){
-        return ResponseEntity.status(HttpStatus.OK)
-                .body(productDetailService.getProductDetail(reference));
-    }
 }

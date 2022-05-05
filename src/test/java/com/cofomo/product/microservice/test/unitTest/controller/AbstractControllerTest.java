@@ -1,7 +1,6 @@
 package com.cofomo.product.microservice.test.unitTest.controller;
 
 
-import com.cofomo.product.microservice.dto.FournisseurDto;
 import com.cofomo.product.microservice.dto.ProductDto;
 import com.cofomo.product.microservice.mapper.MapStructMapper;
 import com.cofomo.product.microservice.model.ProductEntity;

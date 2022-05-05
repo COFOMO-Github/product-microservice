@@ -7,6 +7,7 @@ import com.cofomo.product.microservice.dto.ProductDto;
 import com.cofomo.product.microservice.model.ProductEntity;
 import com.cofomo.product.microservice.web.exception.NotFoundException;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MvcResult;
@@ -31,6 +32,7 @@ public class ControllerTest extends AbstractControllerTest {
 
 
     @Test
+    @Disabled
     public void getProductList() throws Exception {
         String uri = PRODUCT_URL + "/list";
 
@@ -58,6 +60,7 @@ public class ControllerTest extends AbstractControllerTest {
     }
 
     @Test
+    @Disabled
     public void getProductById() throws Exception {
         Long id = 1L;
         String uri = PRODUCT_URL + "/" + id;

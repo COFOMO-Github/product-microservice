@@ -1,10 +1,10 @@
 plugins {
-	id 'org.springframework.boot' version '2.6.6'
-	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
-	id 'java'
-	id 'jacoco'
-	id "org.flywaydb.flyway" version "8.5.5"
-	id 'org.hidetake.swagger.generator' version '2.19.2'
+    id 'org.springframework.boot' version '2.6.6'
+    id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+    id 'java'
+    id 'jacoco'
+    id "org.flywaydb.flyway" version "8.5.5"
+    id 'org.hidetake.swagger.generator' version '2.19.2'
 }
 
 group = 'com.cofomo'
@@ -12,17 +12,17 @@ version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '11'
 
 configurations {
-	compileOnly {
-		extendsFrom annotationProcessor
-	}
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
 }
 // tag::configurations[]
 configurations {
-	jaxb
+    jaxb
 }
 // end::configurations[]
 repositories {
-	mavenCentral()
+    mavenCentral()
 }
 
 // tag:: soap
@@ -31,44 +31,48 @@ compileJava.dependsOn 'genJaxb'
 
 dependencies {
 // tag:: soap
-	implementation 'com.sun.xml.bind:jaxb-core:2.3.0.1'
-	implementation 'com.sun.xml.bind:jaxb-xjc:2.3.2'
-	implementation 'com.sun.xml.bind:jaxb-impl:2.3.2'
-	implementation 'org.glassfish.jaxb:jaxb-runtime'
-	implementation 'org.springframework.ws:spring-ws-core:2.2.0.RELEASE'
-	jaxb "com.sun.xml.bind:jaxb-xjc:2.1.7"
-	implementation 'com.sun.xml.messaging.saaj:saaj-impl:1.5.3'
+    implementation 'com.sun.xml.bind:jaxb-core:2.3.0.1'
+    implementation 'com.sun.xml.bind:jaxb-xjc:2.3.2'
+    implementation 'com.sun.xml.bind:jaxb-impl:2.3.2'
+    implementation 'org.glassfish.jaxb:jaxb-runtime'
+    implementation 'org.springframework.ws:spring-ws-core:2.2.0.RELEASE'
+    jaxb "com.sun.xml.bind:jaxb-xjc:2.1.7"
+    implementation 'com.sun.xml.messaging.saaj:saaj-impl:1.5.3'
 // end::soap
 
-	swaggerCodegen 'io.swagger:swagger-codegen-cli:2.4.26'
-	swaggerCodegen 'io.swagger.codegen.v3:swagger-codegen-cli:3.0.33'
-	swaggerCodegen 'org.openapitools:openapi-generator-cli:3.3.4'
-	implementation 'io.swagger:swagger-annotations:1.6.6'
-	implementation 'org.springframework.boot:spring-boot-starter-validation:2.4.0'
-	implementation group: 'com.jparams', name: 'to-string-verifier', version: '1.4.5'
-	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-	implementation group: 'com.jparams', name: 'to-string-verifier', version: '1.4.5'
+    swaggerCodegen 'io.swagger:swagger-codegen-cli:2.4.26'
+    swaggerCodegen 'io.swagger.codegen.v3:swagger-codegen-cli:3.0.33'
+    swaggerCodegen 'org.openapitools:openapi-generator-cli:3.3.4'
+    implementation 'io.swagger:swagger-annotations:1.6.6'
+    implementation 'org.springframework.boot:spring-boot-starter-validation:2.4.0'
+    implementation group: 'com.jparams', name: 'to-string-verifier', version: '1.4.5'
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    implementation group: 'com.jparams', name: 'to-string-verifier', version: '1.4.5'
 
-	implementation 'org.springframework.boot:spring-boot-starter-web'
-	implementation 'org.springframework.boot:spring-boot-starter-webflux'
-	implementation 'org.flywaydb:flyway-core'
-	implementation 'org.projectlombok:lombok:1.18.20'
-	compileOnly 'org.projectlombok:lombok'
-	implementation 'com.h2database:h2'
-	annotationProcessor 'org.projectlombok:lombok'
-	implementation 'org.mapstruct:mapstruct:1.4.2.Final'
-	annotationProcessor 'org.mapstruct:mapstruct-processor:1.4.2.Final'
-	implementation 'com.google.code.gson:gson:2.7'
-	implementation 'com.googlecode.json-simple:json-simple:1.1.1'
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-webflux'
+    implementation 'org.flywaydb:flyway-core'
+    implementation 'org.projectlombok:lombok:1.18.20'
+    compileOnly 'org.projectlombok:lombok'
+    implementation 'com.h2database:h2'
+    annotationProcessor 'org.projectlombok:lombok'
+    implementation 'org.mapstruct:mapstruct:1.4.2.Final'
+    annotationProcessor 'org.mapstruct:mapstruct-processor:1.4.2.Final'
+    implementation 'com.google.code.gson:gson:2.7'
+    implementation 'com.googlecode.json-simple:json-simple:1.1.1'
+    implementation 'org.springframework.security.oauth:spring-security-oauth2:2.5.2.RELEASE'
+    implementation 'org.springframework.security:spring-security-jwt:1.0.10.RELEASE'
+    implementation 'io.jsonwebtoken:jjwt:0.9.1'
+    runtimeOnly 'org.postgresql:postgresql'
 
-	testImplementation "com.github.tomakehurst:wiremock-jre8:2.33.1"
+    testImplementation "com.github.tomakehurst:wiremock-jre8:2.33.1"
 
-	testImplementation 'org.springframework.boot:spring-boot-starter-test'
-	testImplementation 'io.projectreactor:reactor-test'
-	testImplementation 'io.cucumber:cucumber-java:7.2.3'
-	testImplementation 'junit:junit:4.13'
-	testImplementation 'io.cucumber:cucumber-spring:7.2.3'
-	testImplementation 'io.cucumber:cucumber-junit:7.2.3'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation 'io.projectreactor:reactor-test'
+    testImplementation 'io.cucumber:cucumber-java:7.2.3'
+    testImplementation 'junit:junit:4.13'
+    testImplementation 'io.cucumber:cucumber-spring:7.2.3'
+    testImplementation 'io.cucumber:cucumber-junit:7.2.3'
 
 //	implementation group: 'com.google.guava', name: 'guava', version: 'r05'
 }
@@ -76,106 +80,125 @@ dependencies {
 // tag:: soap
 // tag::wsdl[]
 task genJaxb {
-	ext.sourcesDir = "${buildDir}/generated-sources/jaxb"
-	ext.classesDir = "${buildDir}/classes/jaxb"
-	ext.schema = "http://localhost:8088/api/v1/ws/product-detail.wsdl"
+    ext.sourcesDir = "${buildDir}/generated-sources/jaxb"
+    ext.classesDir = "${buildDir}/classes/jaxb"
+    ext.schema = "http://localhost:8088/api/v1/ws/product-detail.wsdl"
 
-	outputs.dir classesDir
+    outputs.dir classesDir
 
-	doLast() {
-		project.ant {
-			taskdef name: "xjc", classname: "com.sun.tools.xjc.XJCTask",
-					classpath: configurations.jaxb.asPath
-			mkdir(dir: sourcesDir)
-			mkdir(dir: classesDir)
+    doLast() {
+        project.ant {
+            taskdef name: "xjc", classname: "com.sun.tools.xjc.XJCTask",
+                    classpath: configurations.jaxb.asPath
+            mkdir(dir: sourcesDir)
+            mkdir(dir: classesDir)
 
-			xjc(destdir: sourcesDir,language: 'WSDL', schema: schema,
-					package: "com.cofomo.product.microservice.wsdl") {
-				arg(value: "-wsdl")
-				produces(dir: sourcesDir, includes: "**/*.java")
-			}
+            xjc(destdir: sourcesDir, language: 'WSDL', schema: schema,
+                    package: "com.cofomo.product.microservice.wsdl") {
+                arg(value: "-wsdl")
+                produces(dir: sourcesDir, includes: "**/*.java")
+            }
 
-			jaxbTargetDir = classesDir
-			javac(destdir: classesDir, source: 11, target: 11, debug: true,
-					debugLevel: "lines,vars,source",
-					classpath: configurations.jaxb.asPath) {
-				src(path: sourcesDir)
-				include(name: "**/*.java")
-				include(name: "*.java")
-			}
+            jaxbTargetDir = classesDir
+            javac(destdir: classesDir, source: 11, target: 11, debug: true,
+                    debugLevel: "lines,vars,source",
+                    classpath: configurations.jaxb.asPath) {
+                src(path: sourcesDir)
+                include(name: "**/*.java")
+                include(name: "*.java")
+            }
 
-			copy(todir: classesDir) {
-				fileset(dir: sourcesDir, erroronmissingdir: false) {
-					exclude(name: "**/*.java")
-				}
-			}
-		}
-	}
+            copy(todir: classesDir) {
+                fileset(dir: sourcesDir, erroronmissingdir: false) {
+                    exclude(name: "**/*.java")
+                }
+            }
+        }
+    }
 }
 // end::wsdl[]
 
 
-
 bootJar {
-	baseName = 'gs-consuming-web-service'
-	version = '0.0.1'
+    baseName = 'gs-consuming-web-service'
+    version = '0.0.1'
 }
 // end::soap
 
 configurations {
-	cucumberRuntime {
-		extendsFrom testImplementation
-	}
+    cucumberRuntime {
+        extendsFrom testImplementation
+    }
 }
 
 tasks.named('test') {
-	useJUnitPlatform()
+    useJUnitPlatform()
 }
 
 jacoco {
-	toolVersion = "0.8.6"
-	reportsDir = file("$buildDir/jacoco")
+    toolVersion = "0.8.6"
+    reportsDir = file("$buildDir/jacoco")
 }
 
 test {
 //    exclude 'build/swagger-api/.*'
 
-	finalizedBy jacocoTestReport
+    finalizedBy jacocoTestReport
 }
 
 jacocoTestReport {
-	dependsOn test
+    dependsOn test
 }
 
 task cucumberCli() {
-	dependsOn assemble, testClasses
-	doLast {
-		javaexec {
-			main = "io.cucumber.core.cli.Main"
-			classpath = configurations.cucumberRuntime + sourceSets.main.output + sourceSets.test.output
-			args = [
-					'--plugin', 'pretty',
-					'--plugin', 'html:target/cucumber-report.html',
-					'--glue', 'com.cofomo.product.microservice',
-					'src/test/resources']
-		}
-	}
+    dependsOn assemble, testClasses
+    doLast {
+        javaexec {
+            main = "io.cucumber.core.cli.Main"
+            classpath = configurations.cucumberRuntime + sourceSets.main.output + sourceSets.test.output
+            args = [
+                    '--plugin', 'pretty',
+                    '--plugin', 'html:target/cucumber-report.html',
+                    '--glue', 'com.cofomo.product.microservice',
+                    'src/test/resources']
+        }
+    }
 }
 
 swaggerSources {
-	petstore {
-		inputFile = file('src/main/resources/yaml/product-api.yaml')
-		code {
-			outputDir = file("$buildDir/swagger-api")
-			language = 'spring'
-			components = ['models', 'apis']
-		}
-	}
+    petstoreV1 {
+        inputFile = file('src/main/resources/yaml/product-api.yaml')
+        code {
+            outputDir = file("$buildDir/swagger-api/product")
+            language = 'spring'
+            components = ['models', 'apis']
+        }
+    }
+    petstoreV2 {
+        inputFile = file('src/main/resources/yaml/externe/fournisseur-api.yaml')
+        code {
+            outputDir = file("$buildDir/swagger-api/fournisseur")
+                    language = 'spring'
+                    components = ['models', 'apis']
+        }
+    }
+    petstoreV3 {
+        inputFile = file('src/main/resources/yaml/user-api.yaml')
+        code {
+            outputDir = file("$buildDir/swagger-api/user")
+                    language = 'spring'
+                    components = ['models', 'apis']
+        }
+    }
 }
 
-compileJava.dependsOn swaggerSources.petstore.code
-sourceSets.main.java.srcDir "$buildDir/swagger-api/src/main/java"
-sourceSets.main.resources.srcDir "$buildDir/swagger-api/src/main/resources"
+compileJava.dependsOn swaggerSources.petstoreV1.code, swaggerSources.petstoreV2.code, swaggerSources.petstoreV3.code
+sourceSets.main.java.srcDirs "${swaggerSources.petstoreV1.code.outputDir}/src/main/java",
+        "${swaggerSources.petstoreV2.code.outputDir}/src/main/java",
+        "${swaggerSources.petstoreV3.code.outputDir}/src/main/java"
+sourceSets.main.resources.srcDirs "${swaggerSources.petstoreV1.code.outputDir}/src/main/resources",
+        "${swaggerSources.petstoreV2.code.outputDir}/src/main/resources",
+        "${swaggerSources.petstoreV3.code.outputDir}/src/main/resources"
 
 // tag:: soap
 sourceSets.main.java.srcDir "$buildDir/generated-sources/jaxb"

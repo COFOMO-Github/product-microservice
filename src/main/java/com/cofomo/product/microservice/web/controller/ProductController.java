@@ -7,7 +7,7 @@ import com.cofomo.product.microservice.services.impl.ProductDetailServiceImpl;
 import com.cofomo.product.microservice.web.exception.NotFoundException;
 import com.cofomo.product.microservice.wsdl.ProductDetail;
 import io.swagger.api.ProductApi;
-import io.swagger.model.Fournisseur;
+import io.swagger.model.Supplier;
 import io.swagger.model.Product;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -53,7 +53,7 @@ public class ProductController implements ProductApi {
         log.info("Envoi de la product dont l'ID est : " + id);
         ProductDto productDto = productService.getProductById(Long.parseLong(id));
         Product product = mapper.productDtoToProduct(productService.getProductById(Long.parseLong(id)));
-        Fournisseur fournisseur = mapper.fournsseurDtoToFournisseur(
+        Supplier fournisseur = mapper.fournsseurDtoToFournisseur(
                 productService.getFournisseurByReference(productDto.getReffrs()));
         product.setSupplier(fournisseur);
 
@@ -72,7 +72,7 @@ public class ProductController implements ProductApi {
                 .map(p -> {
                     ProductDto productDto = productService.getProductById(Long.parseLong(p.getId()));
                     try {
-                        Fournisseur fournisseur = mapper.fournsseurDtoToFournisseur(
+                        Supplier fournisseur = mapper.fournsseurDtoToFournisseur(
                                 productService.getFournisseurByReference(productDto.getReffrs()));
                         p.setSupplier(fournisseur);
 

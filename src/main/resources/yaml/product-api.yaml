@@ -120,13 +120,13 @@ definitions:
         type: string
         description: Reference of the reffrs
       supplier:
-        $ref: '#/definitions/Fournisseur'
+        $ref: '#/definitions/Supplier'
       productDetail:
         $ref: '#/definitions/ProductDetailResponse'
 
-  Fournisseur:
-    title: Fournisseur
-    description: A Fournisseur definition
+  Supplier:
+    title: Supplier
+    description: A Supplier definition
     required:
       - name
       - price
@@ -135,10 +135,10 @@ definitions:
         type: string
       name:
         type: string
-        description: Name of the Fournisseur
+        description: Name of the Supplier
       country:
         type: string
-        description: Pays du fournisseur
+        description: Pays du Supplier
 
   ProductResponse:
     type: object

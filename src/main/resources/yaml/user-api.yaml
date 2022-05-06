@@ -1,0 +1,118 @@
+swagger: '2.0'
+info:
+  description: This is a simple api Information Center Api
+  version: 1.0.0
+  title: User API Information Service
+tags:
+  - name: User API
+    description: Everything about your apis
+schemes:
+  - http
+paths:
+  /User:
+    post:
+      tags:
+        - User
+      summary: Add a new User
+      description: Creates a new User
+      operationId: addUser
+      parameters:
+        - in: body
+          name: body
+          description: User object that needs to be added
+          required: true
+          schema:
+            $ref: '#/definitions/User'
+      responses:
+        '201':
+          description: Successfully created
+          schema:
+            $ref: '#/definitions/User'
+        '400':
+          description: Bad request
+
+  /User/{id}:
+    get:
+      tags:
+        - User
+      summary: Retrieve a single User
+      description: Retrieve a single User
+      operationId: getUser
+      parameters:
+        - in: path
+          name: id
+          description: Id of the User desired to be retrieved
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Succesful retrieval of User
+          schema:
+            $ref: '#/definitions/User'
+        '400':
+          description: Bad request
+        '404':
+          description: User not found
+
+  /User/delete/{id}:
+    delete:
+      tags:
+        - User
+      summary: Delete a single User
+      description: Delete a single User
+      operationId: deleteUser
+      parameters:
+        - in: path
+          name: id
+          description: Id of the User to be deleted
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Succesful retrieval of User
+          schema:
+            type:
+              boolean
+        '400':
+          description: Bad request
+        '404':
+          description: User not found
+  /User/list:
+    get:
+      tags:
+        - User
+      summary: Retrieve a list of Users
+      description: Retrieve a list of Users
+      operationId: getUsers
+      responses:
+        '200':
+          description: Succesful retrieval of User
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/User'
+        '400':
+          description: Bad request
+        '404':
+          description: User not found
+
+
+definitions:
+  User:
+    title: User
+    description: A User definition
+    required:
+      - name
+      - price
+    properties:
+      id:
+        type: string
+      username:
+        type: string
+        description: Username of the User
+      password:
+        type: string
+        description: Password of the User
+
+
+

@@ -1,4 +1,4 @@
-package com.cofomo.squelettemicroservice.configs;
+package com.cofomo.product.microservice.configs;
 
 import org.mapstruct.MapperConfig;
 

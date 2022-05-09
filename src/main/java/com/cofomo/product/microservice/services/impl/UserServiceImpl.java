@@ -8,13 +8,12 @@ import com.cofomo.product.microservice.services.UserService;
 import com.cofomo.product.microservice.web.exception.NotFoundException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -55,7 +54,13 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     }
 
     @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        return new User("foo", "foo", new ArrayList<>());
+    public UserDetails loadUserByUsername(String username)  {
+        UserEntity user = userDao.findByUsername(username).orElseThrow();
+        return new User(user.getUsername(), user.getPassword(), getAuthorities(user));
+    }
+    private List getAuthorities(UserEntity user) {
+        String roleByUserId = user.getRole();
+        final List authorities = List.of(new SimpleGrantedAuthority("ROLE_" + roleByUserId.toUpperCase()));
+        return authorities;
     }
 }

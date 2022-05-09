@@ -8,5 +8,7 @@ import lombok.Data;
 @Builder
 @AllArgsConstructor
 public class AuthenticationResponseDto {
+    private String username;
+    private String password;
     private final String jwt;
 }

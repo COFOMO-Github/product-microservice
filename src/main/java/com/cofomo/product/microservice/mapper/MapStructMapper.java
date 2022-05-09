@@ -44,10 +44,12 @@ public interface MapStructMapper {
 
     List<UserDto> userListEntityToUserDtoList(List<UserEntity> all);
 
+    @Mapping(target = "jwt", ignore = true)
     UserDto userEntityToUserDto(UserEntity userEntity);
 
     UserEntity userDtoToUserEntity(UserDto user);
 
+    @Mapping(target = "jwt", ignore = true)
     UserDto userToUserDto(User user);
 
     User userDtoToUser(UserDto addUser);

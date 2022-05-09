@@ -1,9 +1,12 @@
 package com.cofomo.product.microservice.utils;
 
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 import org.springframework.stereotype.Component;
 
 
 @Component
+@AllArgsConstructor
 public class Constants {
 
     /*********************

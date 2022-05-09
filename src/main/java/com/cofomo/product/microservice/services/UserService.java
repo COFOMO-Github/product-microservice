@@ -18,4 +18,7 @@ public interface UserService {
 
 
     public void deleteUser(Long id);
+//
+//
+//    public UserDto loadUserByUsername(String username);
 }

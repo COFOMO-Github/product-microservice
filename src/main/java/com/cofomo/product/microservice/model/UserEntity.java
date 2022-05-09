@@ -14,7 +14,7 @@ import static com.cofomo.product.microservice.utils.Constants.*;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = USER)
+@Table(name = USER_TABLE)
 public class UserEntity {
 
     @Id
@@ -27,4 +27,7 @@ public class UserEntity {
 
     @Column(name = PASSWORD)
     private String password;
+
+    @Column(name = ROLE)
+    private String role;
 }

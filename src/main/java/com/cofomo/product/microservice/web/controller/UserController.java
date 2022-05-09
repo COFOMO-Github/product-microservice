@@ -9,15 +9,12 @@ import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RestController;
-
 import java.util.List;
 
 @RestController
 @AllArgsConstructor
 @Slf4j
-@CrossOrigin(origins = "http://localhost:4200")
 public class UserController implements UserApi {
 
     UserService userService;
@@ -42,7 +39,6 @@ public class UserController implements UserApi {
     @Override
     public ResponseEntity<User> getUser(String id) {
         log.info("Envoi de la user dont l'ID est : " + id);
-        UserDto userDto = userService.getUserById(Long.parseLong(id));
         User user = mapper.userDtoToUser(userService.getUserById(Long.parseLong(id)));
         return ResponseEntity.status(HttpStatus.OK)
                 .body(user);

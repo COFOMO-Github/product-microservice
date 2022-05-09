@@ -13,7 +13,7 @@ import java.util.function.Function;
 @Service
 public class JwtUtil {
     @Value( "${oauth2.jwt.secret-key}" )
-    private String SECRET_KEY ;
+    private String secretKey;
 
     @Value( "${oauth2.jwt.expiration}" )
     private long expiration ;
@@ -31,7 +31,7 @@ public class JwtUtil {
         return claimsResolver.apply(claims);
     }
     private Claims extractAllClaims(String token) {
-        return Jwts.parser().setSigningKey(SECRET_KEY).parseClaimsJws(token).getBody();
+        return Jwts.parser().setSigningKey(secretKey).parseClaimsJws(token).getBody();
     }
 
     private Boolean isTokenExpired(String token) {
@@ -50,7 +50,7 @@ public class JwtUtil {
                 .setSubject(subject)
                 .setIssuedAt(new Date(System.currentTimeMillis()))
                 .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 60 * 10))
-                .signWith(SignatureAlgorithm.HS256, SECRET_KEY).compact();
+                .signWith(SignatureAlgorithm.HS256, secretKey).compact();
     }
 
     public Boolean validateToken(String token, UserDetails userDetails) {

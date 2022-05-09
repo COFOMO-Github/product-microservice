@@ -5,6 +5,7 @@ import com.cofomo.product.microservice.services.WebClientService;
 import com.cofomo.product.microservice.web.exception.NotFoundException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -16,8 +17,8 @@ import reactor.core.publisher.Mono;
 @RequiredArgsConstructor
 @Slf4j
 public class WebClientServiceImpl implements WebClientService {
-
-    private static String calculeApiPath = "http://localhost:8085/api/v1";
+    @Value( "${webclient.url.fournisseur}" )
+    private String calculeApiPath ;
 
     @Override
     public FournisseurDto getFournisseurByReference(String reffrs) {

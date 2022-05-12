@@ -190,15 +190,25 @@ swaggerSources {
                     components = ['models', 'apis']
         }
     }
+    petstoreV4 {
+        inputFile = file('src/main/resources/yaml/authentication-api.yaml')
+        code {
+            outputDir = file("$buildDir/swagger-api/authentication")
+                    language = 'spring'
+                    components = ['models', 'apis']
+        }
+    }
 }
 
-compileJava.dependsOn swaggerSources.petstoreV1.code, swaggerSources.petstoreV2.code, swaggerSources.petstoreV3.code
+compileJava.dependsOn swaggerSources.petstoreV1.code, swaggerSources.petstoreV2.code, swaggerSources.petstoreV3.code, swaggerSources.petstoreV4.code
 sourceSets.main.java.srcDirs "${swaggerSources.petstoreV1.code.outputDir}/src/main/java",
         "${swaggerSources.petstoreV2.code.outputDir}/src/main/java",
-        "${swaggerSources.petstoreV3.code.outputDir}/src/main/java"
+        "${swaggerSources.petstoreV3.code.outputDir}/src/main/java",
+        "${swaggerSources.petstoreV4.code.outputDir}/src/main/java"
 sourceSets.main.resources.srcDirs "${swaggerSources.petstoreV1.code.outputDir}/src/main/resources",
         "${swaggerSources.petstoreV2.code.outputDir}/src/main/resources",
-        "${swaggerSources.petstoreV3.code.outputDir}/src/main/resources"
+        "${swaggerSources.petstoreV3.code.outputDir}/src/main/resources",
+        "${swaggerSources.petstoreV4.code.outputDir}/src/main/resources"
 
 // tag:: soap
 sourceSets.main.java.srcDir "$buildDir/generated-sources/jaxb"

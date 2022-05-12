@@ -55,7 +55,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username)  {
-        UserEntity user = userDao.findByUsername(username).orElseThrow();
+        UserEntity user = userDao.findByUsername(username).orElseThrow(() -> new NotFoundException("User not found"));
         return new User(user.getUsername(), user.getPassword(), getAuthorities(user));
     }
     private List getAuthorities(UserEntity user) {

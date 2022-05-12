@@ -1,0 +1,64 @@
+swagger: '2.0'
+info:
+  description: This is a simple api Information Center Api
+  version: 1.0.0
+  title: Authentication API Information Service
+tags:
+  - name: Authentication API
+    description: Everything about your apis
+schemes:
+  - http
+paths:
+  /authentication/authenticate:
+    post:
+      tags:
+        - Authentication
+      summary: Authentication
+      description: User authentication
+      operationId: authentication
+      parameters:
+        - in: body
+          name: loginRequest
+          description: user authentication credentials
+          required: true
+          schema:
+            $ref: '#/definitions/LoginRequest'
+      responses:
+        '200':
+          description: Successfully loged in
+          schema:
+            $ref: '#/definitions/LoginResponse'
+        '400':
+          description: Bad request
+        '403':
+          description: Forbidden
+        '404':
+          description: User not found
+
+
+
+definitions:
+  LoginRequest:
+    title: LoginRequest
+    description: login request
+    required:
+      - username
+      - password
+    properties:
+      username:
+        type: string
+      password:
+        type: string
+
+  LoginResponse:
+    title: LoginResponse
+    description: loin respense
+    properties:
+      id:
+        type: string
+      username:
+        type: string
+      role:
+        type: string
+      token:
+        type: string

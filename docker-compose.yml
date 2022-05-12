@@ -1,0 +1,100 @@
+version: '3.8'
+services:
+  product:
+    image: 'image-product-microservice:latest'
+    container_name: product
+    ports:
+      - "8080:8080"
+    expose:
+      - "8080"
+    depends_on:
+      - db
+      - fournisseur
+      - productsoap
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/product
+      - SPRING_DATASOURCE_USERNAME=postgres
+      - SPRING_DATASOURCE_PASSWORD=postgres
+      - SPRING_JPA_HIBERNATE_DDL_AUTO=update
+  fournisseur:
+    image: 'image-fournisseur-microservice:latest'
+    container_name: fournisseur
+    ports:
+      - "8085:8080"
+    expose:
+      - "8085"
+    depends_on:
+      - db
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/fournisseur
+      - SPRING_DATASOURCE_USERNAME=postgres
+      - SPRING_DATASOURCE_PASSWORD=postgres
+      - SPRING_JPA_HIBERNATE_DDL_AUTO=update
+  productsoap:
+    image: 'image-productsoap-microservice:latest'
+    container_name: productsoap
+    ports:
+      - "8088:8080"
+    expose:
+      - "8088"
+    depends_on:
+      - db
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/productsoap
+      - SPRING_DATASOURCE_USERNAME=postgres
+      - SPRING_DATASOURCE_PASSWORD=postgres
+      - SPRING_JPA_HIBERNATE_DDL_AUTO=update
+#  dbproduct:
+#    image: postgres:14.2-alpine
+#    container_name: dbproduct
+#    hostname: dbproduct
+#    ports:
+#      - "5432:5432"
+#    expose:
+#      - "5432"
+#    environment:
+#      - POSTGRES_DB=product
+#      - POSTGRES_USER=postgres
+#      - POSTGRES_PASSWORD=postgres
+
+#  dbfournisseur:
+#    image: postgres:14.2-alpine
+#    container_name: dbfournisseur
+#    hostname: dbfournisseur
+#    ports:
+#      - "5433:5433"
+#    expose:
+#      - "5433"
+#    environment:
+#      - POSTGRES_DB=fournisseur
+#      - POSTGRES_USER=postgres
+#      - POSTGRES_PASSWORD=postgres
+#  dbproductsoap:
+#    image: postgres:14.2-alpine
+#    container_name: dbproductsoap
+#    hostname: dbproductsoap
+#    ports:
+#      - "5432:5432"
+#    expose:
+#      - "5432"
+#    volumes:
+#      - ./docker_postgres_init.sql:/docker-entrypoint-initdb.d/docker_postgres_init.sql
+#    environment:
+#      - POSTGRES_MULTIPLE_DATABASES=product-soap,fournisseur
+#      - POSTGRES_USER=postgres
+#      - POSTGRES_PASSWORD=postgres
+
+  db:
+    image: postgres:14.2-alpine
+    container_name: db
+    hostname: db
+    ports:
+      - "5432:5432"
+    expose:
+      - "5432"
+    volumes:
+      - ./docker_postgres_init.sql:/docker-entrypoint-initdb.d/docker_postgres_init.sql
+    environment:
+      - POSTGRES_MULTIPLE_DATABASES=product,productsoap,fournisseur
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres

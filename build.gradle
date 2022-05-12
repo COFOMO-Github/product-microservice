@@ -39,7 +39,7 @@ dependencies {
 	jaxb "com.sun.xml.bind:jaxb-xjc:2.1.7"
 	implementation 'com.sun.xml.messaging.saaj:saaj-impl:1.5.3'
 // end::soap
-
+	runtimeOnly 'org.postgresql:postgresql'
 	swaggerCodegen 'io.swagger:swagger-codegen-cli:2.4.26'
 	swaggerCodegen 'io.swagger.codegen.v3:swagger-codegen-cli:3.0.33'
 	swaggerCodegen 'org.openapitools:openapi-generator-cli:3.3.4'
@@ -113,13 +113,6 @@ task genJaxb {
 	}
 }
 // end::wsdl[]
-
-
-
-bootJar {
-	baseName = 'gs-consuming-web-service'
-	version = '0.0.1'
-}
 // end::soap
 
 configurations {

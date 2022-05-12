@@ -1,6 +1,6 @@
 
 CREATE TABLE IF NOT EXISTS  PRODUCT(
-    ID SERIAL AUTO_INCREMENT PRIMARY KEY ,
+    ID SERIAL PRIMARY KEY ,
     NAME varchar(255),
     PRICE double precision,
     REFFRS varchar(255),

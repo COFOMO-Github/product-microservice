@@ -44,46 +44,13 @@ services:
       - SPRING_DATASOURCE_USERNAME=postgres
       - SPRING_DATASOURCE_PASSWORD=postgres
       - SPRING_JPA_HIBERNATE_DDL_AUTO=update
-#  dbproduct:
-#    image: postgres:14.2-alpine
-#    container_name: dbproduct
-#    hostname: dbproduct
-#    ports:
-#      - "5432:5432"
-#    expose:
-#      - "5432"
-#    environment:
-#      - POSTGRES_DB=product
-#      - POSTGRES_USER=postgres
-#      - POSTGRES_PASSWORD=postgres
-
-#  dbfournisseur:
-#    image: postgres:14.2-alpine
-#    container_name: dbfournisseur
-#    hostname: dbfournisseur
-#    ports:
-#      - "5433:5433"
-#    expose:
-#      - "5433"
-#    environment:
-#      - POSTGRES_DB=fournisseur
-#      - POSTGRES_USER=postgres
-#      - POSTGRES_PASSWORD=postgres
-#  dbproductsoap:
-#    image: postgres:14.2-alpine
-#    container_name: dbproductsoap
-#    hostname: dbproductsoap
-#    ports:
-#      - "5432:5432"
-#    expose:
-#      - "5432"
-#    volumes:
-#      - ./docker_postgres_init.sql:/docker-entrypoint-initdb.d/docker_postgres_init.sql
-#    environment:
-#      - POSTGRES_MULTIPLE_DATABASES=product-soap,fournisseur
-#      - POSTGRES_USER=postgres
-#      - POSTGRES_PASSWORD=postgres
-
+  front:
+    image: 'image-front-microservice:latest'
+    container_name: front
+    ports:
+      - "4200:80"
+    depends_on:
+      - product
   db:
     image: postgres:14.2-alpine
     container_name: db

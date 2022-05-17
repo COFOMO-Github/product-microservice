@@ -25,7 +25,6 @@ import java.util.stream.Collectors;
 @RestController
 @AllArgsConstructor
 @Slf4j
-@CrossOrigin(origins = "http://localhost:4200")
 public class ProductController implements ProductApi {
 
     ProductService productService;

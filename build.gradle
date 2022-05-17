@@ -70,15 +70,16 @@ dependencies {
 	testImplementation 'io.cucumber:cucumber-spring:7.2.3'
 	testImplementation 'io.cucumber:cucumber-junit:7.2.3'
 
-//	implementation group: 'com.google.guava', name: 'guava', version: 'r05'
 }
-
+def props = new Properties()
+file("src/main/resources/application.properties").withInputStream { props.load(it) }
+//props.getProperty("spring.datasource.url")
 // tag:: soap
 // tag::wsdl[]
 task genJaxb {
 	ext.sourcesDir = "${buildDir}/generated-sources/jaxb"
 	ext.classesDir = "${buildDir}/classes/jaxb"
-	ext.schema = "http://localhost:8088/api/v1/ws/product-detail.wsdl"
+	ext.schema = props.getProperty("api.path.productsoap")+"/product-detail.wsdl"
 
 	outputs.dir classesDir
 
